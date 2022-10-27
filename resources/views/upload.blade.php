@@ -17,6 +17,9 @@
                 name="name"
                 placeholder="e.g. Rex"
                 >
+            <button type="submit">
+                Submit
+            </button>
     </form>
 
 </div>
