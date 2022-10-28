@@ -23,3 +23,6 @@ Route::resources([
 ]);
 
 Route::post('/pictures/{picture}/upvote', [PictureController::class, 'upvote'])->name('pictures.upvote');
+
+// post picture to database and local storage 
+Route::post('/pictures/create', [PictureController::class, 'store']);
