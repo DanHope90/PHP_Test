@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Picture;
+use Illuminate\Cache\DatabaseStore;
 
 class PictureController extends Controller
 {
@@ -39,6 +40,20 @@ class PictureController extends Controller
     public function store(Request $request)
     {
         // See PictureControllerTest to see what this should do
+
+        $request->validate([
+            'name' =>'required',
+            'image' =>'required|mimes:jpg,png,jpeg|max:5048' 
+        ]);
+
+        $newImageName = $request->name . '.' . $request->image->extension();
+       
+        //requst paths to public and database 
+        $request->image->move(public_path('images'), $newImageName);
+        //$request->image->save();
+
+       return redirect('/');
+
     }
 
     /**
