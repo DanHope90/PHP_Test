@@ -3,9 +3,10 @@
 @section('content')
 
 <div class="bg-white p-4 w-2/3 mx-auto">
+    <body>
     <h2 class="text-center text-2xl">Upload your dog!</h2>
     <form 
-        action="PictureController.php" 
+        action="/pictures/create" 
         method="post" 
         enctype="multipart/form-data">
             <input
@@ -21,7 +22,7 @@
                 Submit
             </button>
     </form>
-
+    </body>
 </div>
 
 @endsection
