@@ -41,16 +41,21 @@ class PictureController extends Controller
     {
         // See PictureControllerTest to see what this should do
 
-        $request->validate([
+       $request->validate([
             'name' =>'required',
             'image' =>'required|mimes:jpg,png,jpeg|max:5048' 
         ]);
 
-        $newImageName = $request->name . '.' . $request->image->extension();
        
-        //requst paths to public and database 
-        $request->image->move(public_path('images'), $newImageName);
-        //$request->image->save();
+        //saves to database
+        $file = $request->image;
+        $originName = $file->hashName();
+        $petName = $request->get('name');
+        $picture = new Picture(['name' => $petName, 'file_path' => $originName]);
+        $picture->save();
+
+        //requst paths to public
+        $request->image->move(storage_path('app/public/'),  $originName);
 
        return redirect('/');
 
@@ -64,6 +69,9 @@ class PictureController extends Controller
      */
     public function upvote(Request $request, Picture $picture)
     {
-        
+        //here I want to increment the votes then save to db
+        $picture->votes++;
+        $picture->save();
+        return redirect('/');
     }
 }
