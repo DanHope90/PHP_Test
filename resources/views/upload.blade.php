@@ -6,7 +6,7 @@
     <body>
     <h2 class="text-center text-2xl">Upload your dog!</h2>
     <form 
-        action="/pictures/create" 
+        action="/pictures/store" 
         method="post" 
         enctype="multipart/form-data">
             <input
