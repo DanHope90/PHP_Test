@@ -39,15 +39,14 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
-        // See PictureControllerTest to see what this should do
-
+        // validates the image input 
        $request->validate([
             'name' =>'required',
             'image' =>'required|mimes:jpg,png,jpeg|max:5048' 
         ]);
 
-       
-        //saves to database
+        //saves image as variable $file // saves the original files name $originName
+        //gets the form input name $petName // saves the pictures model to database
         $file = $request->image;
         $originName = $file->hashName();
         $petName = $request->get('name');
@@ -70,6 +69,8 @@ class PictureController extends Controller
     public function upvote(Request $request, Picture $picture)
     {
         //here I want to increment the votes then save to db
+        // when user clciksupvote button the the image vote increments by +1
+        // it saves to db then redirects back hompage
         $picture->votes++;
         $picture->save();
         return redirect('/');
